@@ -1,0 +1,71 @@
+/* Modern */
+.cv-preview.modern {
+    font-family: Arial, sans-serif;
+    border-top: 8px solid #6c4ce4;
+    color: #29243a;
+}
+
+/* Corporate */
+.cv-preview.corporate {
+    font-family: Arial, sans-serif;
+    border-left: 12px solid #17365d;
+    color: #17365d;
+}
+
+/* Creative */
+.cv-preview.creative {
+    font-family: Georgia, serif;
+    border-top: 12px solid #e18b72;
+    background: #fff8f5 !important;
+    color: #754c45;
+}
+
+/* Elegant */
+.cv-preview.elegant {
+    font-family: Georgia, serif;
+    border-top: 5px double #b18a45;
+    color: #514332;
+    text-align: center;
+}
+
+/* Professional */
+.cv-preview.professional {
+    font-family: Arial, sans-serif;
+    border-top: 10px solid #263238;
+    color: #263238;
+    background: #f8fafc !important;
+}
+
+/* Section headings */
+.cv-preview h3 {
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 6px;
+    margin-top: 24px;
+}
+@media print {
+    body:has(.cv-preview) * {
+        visibility: hidden;
+    }
+
+    body:has(.cv-preview) .cv-preview,
+    body:has(.cv-preview) .cv-preview * {
+        visibility: visible;
+    }
+
+    body:has(.cv-preview) .cv-preview {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: none !important;
+        min-height: auto !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        background: white !important;
+    }
+
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+}

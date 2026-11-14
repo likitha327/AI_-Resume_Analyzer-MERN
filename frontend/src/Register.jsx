@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from "./api";
 
 function Register() {
     const [name, setName] = useState("");
@@ -8,11 +9,9 @@ function Register() {
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        alert("Register button clicked");
-
         try {
             const response = await fetch(
-                "http://127.0.0.1:5000/api/auth/register",
+                apiUrl("/api/auth/register"),
                 {
                     method: "POST",
                     headers: {

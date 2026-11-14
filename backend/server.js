@@ -32,8 +32,21 @@ if (!MONGO_URI) {
         .catch((error) => console.log("MongoDB connection error:", error.message));
 }
 
+const CONNECTION_STATES = ["disconnected", "connected", "connecting", "disconnecting"];
+
 app.get("/", (req, res) => {
     res.send("AI Resume Analyzer Backend is Running!");
+});
+
+app.get("/api/health", (req, res) => {
+    const database = CONNECTION_STATES[mongoose.connection.readyState] || "unknown";
+    const isHealthy = database === "connected";
+
+    res.status(isHealthy ? 200 : 503).json({
+        status: isHealthy ? "ok" : "degraded",
+        database,
+        mongoUriConfigured: Boolean(process.env.MONGO_URI)
+    });
 });
 
 const PORT = process.env.PORT || 5000;

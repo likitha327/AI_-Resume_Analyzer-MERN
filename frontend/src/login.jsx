@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from "./api";
 
 function Login({ onLoginSuccess }) {
     const [email, setEmail] = useState("");
@@ -9,7 +10,7 @@ function Login({ onLoginSuccess }) {
 
         try {
             const response = await fetch(
-                "http://127.0.0.1:5000/api/auth/login",
+                apiUrl("/api/auth/login"),
                 {
                     method: "POST",
                     headers: {

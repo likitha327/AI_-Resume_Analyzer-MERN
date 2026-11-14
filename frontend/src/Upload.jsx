@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiUrl } from "./api";
 
 function Upload({ onAnalysisComplete ,onBack }) {
     const [file, setFile] = useState(null);
@@ -18,7 +19,7 @@ function Upload({ onAnalysisComplete ,onBack }) {
             formData.append("resume", file);
 
             const response = await fetch(
-                "http://localhost:5000/api/resume/analyze",
+                apiUrl("/api/resume/analyze"),
                 {
                     method: "POST",
                     body: formData

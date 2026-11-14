@@ -14,9 +14,23 @@ app.use(express.json());
 app.use("/api/auth",authRoutes);
 app.use("/api/resume",resumeRoutes);
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("MongoDB connected successfully"))
-    .catch((error) => console.log("MongoDB connection error:", error));
+const MONGO_URI = process.env.MONGO_URI;
+
+if (!MONGO_URI) {
+    console.error("MONGO_URI is not set. Add it to your environment variables.");
+} else if (
+    !MONGO_URI.startsWith("mongodb://") &&
+    !MONGO_URI.startsWith("mongodb+srv://")
+) {
+    console.error(
+        'MONGO_URI is invalid: it must start with "mongodb://" or "mongodb+srv://".'
+    );
+} else {
+    mongoose
+        .connect(MONGO_URI)
+        .then(() => console.log("MongoDB connected successfully"))
+        .catch((error) => console.log("MongoDB connection error:", error.message));
+}
 
 app.get("/", (req, res) => {
     res.send("AI Resume Analyzer Backend is Running!");
@@ -24,6 +38,6 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
 });

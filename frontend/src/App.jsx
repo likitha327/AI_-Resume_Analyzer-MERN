@@ -1,7 +1,7 @@
 import Upload from "./Upload";
 import { useState } from "react";
 import Register from "./Register";
-import Login from "./Login";
+import Login from "./login.jsx";
 import Dashboard from "./Dashboard";
 import Result from "./Result";
 import CVBuilder from "./CVBuilder";

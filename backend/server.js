@@ -27,7 +27,11 @@ if (!MONGO_URI) {
     );
 } else {
     mongoose
-        .connect(MONGO_URI)
+        .connect(MONGO_URI, {
+            serverSelectionTimeoutMS: 5000,
+            connectTimeoutMS: 5000,
+            socketTimeoutMS: 5000
+        })
         .then(() => console.log("MongoDB connected successfully"))
         .catch((error) => console.log("MongoDB connection error:", error.message));
 }
